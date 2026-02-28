@@ -67,7 +67,7 @@ export default function Home() {
   }, [displayText, headlineIndex, isBackspacing]);
 
   return (
-    <div className="flex flex-col items-center justify-center mx-auto mb-40">
+    <div className="flex flex-col items-center justify-center mx-auto mb-30">
       <section className="animate-show max-w-207 h-[100vh]">
         <div className="mt-30 flex flex-col">
           <span className="font-mono text-lg text-muted-foreground mb-6 inline-flex items-baseline leading-none">
@@ -91,8 +91,8 @@ export default function Home() {
       {/* About Me */}
       <section
         ref={sectionAnimations}
-        id="about-section"
-        className="mb-60 animate-hidden max-w-207 w-full"
+        id="about-me"
+        className="pt-10 mb-50 animate-hidden max-w-207 w-full"
       >
         <span className="font-mono text-2xl text-foreground">About Me</span>
         <hr className="mt-2 mb-6" />
@@ -148,8 +148,9 @@ export default function Home() {
 
       {/* Tech Stack */}
       <section
+        id="tech-stack"
         ref={sectionAnimations}
-        className="mb-60 animate-hidden max-w-207 w-full"
+        className="pt-10 mb-50 animate-hidden max-w-207 w-full"
       >
         <span className="font-mono text-2xl text-foreground">
           Technology Stack
@@ -194,8 +195,9 @@ export default function Home() {
 
       {/* Projects */}
       <section
+        id="projects"
         ref={sectionAnimations}
-        className="mb-100 animate-hidden max-w-207 w-full"
+        className="pt-10 mb-100 animate-hidden max-w-207 w-full"
       >
         <span className="font-mono text-2xl text-foreground">
           Project Showcase
@@ -204,12 +206,16 @@ export default function Home() {
         <div className="bg-muted p-8 rounded-xl">
           <div className="flex gap-22 items-center justify-center">
             <div>
-              <Link
+              <a
                 className="hover:underline hover:decoration-foreground"
-                href="/pokedex"
+                href="https://bc-pokedex.vercel.app/"
+                rel="noopener noreferrer"
+                target="_blank"
               >
-                <h3 className="font-semibold mb-3">Pokédex</h3>
-              </Link>
+                <div className="flex gap-2">
+                  <h3 className="font-semibold mb-3">Pokédex App</h3>
+                </div>
+              </a>
               <p className="text-muted-foreground">
                 View Pokémon across all nine generations. Search for your
                 favorite and filter by type/generation. Click on a Pokémon to
@@ -224,8 +230,10 @@ export default function Home() {
               <div className="source-code">
                 <a
                   className="flex w-fit gap-2 text-foreground font-semibold border px-3 py-1 rounded-md"
-                  href="https://github.com/chambomango/portfolio"
+                  href="https://github.com/chambomango/pokedex"
                   onClick={stopPropagation}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <CodeXml />
                   <span>Source Code</span>

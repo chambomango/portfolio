@@ -73,7 +73,7 @@ export default function NavBar() {
               className="rounded-full"
               asChild
             >
-              <a href="https://github.com/chambomango/portfolio">
+              <a href="https://github.com/chambomango/">
                 <GitHubIcon className="h-4 w-4 text-foreground" />
                 <span className="sr-only">GitHub</span>
               </a>

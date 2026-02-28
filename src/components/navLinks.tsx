@@ -7,8 +7,9 @@ import { cn } from "@/lib/utils";
 import { Route } from "next";
 
 const links: { href: Route; label: string }[] = [
-  { href: "/", label: "Home" },
-  { href: "/pokedex", label: "Pokédex" },
+  { href: "#about-me", label: "About" },
+  { href: "#tech-stack", label: "Tech Stack" },
+  { href: "#projects", label: "Projects" },
 ];
 
 export default function NavLinks() {
