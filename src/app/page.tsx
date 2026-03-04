@@ -92,7 +92,7 @@ export default function Home() {
       <section
         ref={sectionAnimations}
         id="about-me"
-        className="pt-10 mb-50 animate-hidden max-w-207 w-full"
+        className="scroll-mt-20 pt-10 mb-50 animate-hidden max-w-207 w-full"
       >
         <span className="font-mono text-2xl text-foreground">About Me</span>
         <hr className="mt-2 mb-6" />
@@ -150,7 +150,7 @@ export default function Home() {
       <section
         id="tech-stack"
         ref={sectionAnimations}
-        className="pt-10 mb-50 animate-hidden max-w-207 w-full"
+        className="scroll-mt-20 pt-10 mb-50 animate-hidden max-w-207 w-full"
       >
         <span className="font-mono text-2xl text-foreground">
           Technology Stack
@@ -197,7 +197,7 @@ export default function Home() {
       <section
         id="projects"
         ref={sectionAnimations}
-        className="pt-10 mb-100 animate-hidden max-w-207 w-full"
+        className="scroll-mt-20 pt-10 mb-100 animate-hidden max-w-207 w-full"
       >
         <span className="font-mono text-2xl text-foreground">
           Project Showcase

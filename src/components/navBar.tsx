@@ -16,11 +16,15 @@ const SCROLL_THRESHOLD = 50;
 export default function NavBar() {
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
+  const suppressHide = useRef(false);
+  const suppressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       if (currentScrollY < SCROLL_THRESHOLD) {
+        setVisible(true);
+      } else if (suppressHide.current) {
         setVisible(true);
       } else if (currentScrollY > lastScrollY.current) {
         setVisible(false);
@@ -30,8 +34,22 @@ export default function NavBar() {
       lastScrollY.current = currentScrollY;
     };
 
+    const handleNavLinkScroll = () => {
+      //Forces navbar to remain visible for duration of scroll after clicking nav link
+      suppressHide.current = true;
+      setVisible(true);
+      if (suppressTimer.current) clearTimeout(suppressTimer.current);
+      suppressTimer.current = setTimeout(() => {
+        suppressHide.current = false;
+      }, 1200);
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("nav-link-scroll", handleNavLinkScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("nav-link-scroll", handleNavLinkScroll);
+    };
   }, []);
 
   return (

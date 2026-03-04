@@ -15,6 +15,7 @@ const links: { id: string; label: string }[] = [
 
 export default function NavLinks() {
   const sectionButonClicked = React.useCallback((sectionId: string) => {
+    window.dispatchEvent(new CustomEvent("nav-link-scroll"));
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
