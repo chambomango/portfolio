@@ -5,32 +5,30 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Route } from "next";
+import React from "react";
 
-const links: { href: Route; label: string }[] = [
-  { href: "#about-me", label: "About" },
-  { href: "#tech-stack", label: "Tech Stack" },
-  { href: "#projects", label: "Projects" },
+const links: { id: string; label: string }[] = [
+  { id: "about-me", label: "About" },
+  { id: "tech-stack", label: "Tech Stack" },
+  { id: "projects", label: "Projects" },
 ];
 
 export default function NavLinks() {
-  const pathname = usePathname();
+  const sectionButonClicked = React.useCallback((sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   return (
     <>
-      {links.map(({ href, label }) => {
-        const isActive =
-          href === "/" ? pathname === "/" : pathname.startsWith(href);
+      {links.map(({ id: sectionId, label }) => {
         return (
-          <li key={href}>
+          <li key={`nav-btn-${sectionId}`}>
             <Button
               variant="ghost"
-              className={cn(
-                "text-foreground rounded-full",
-                isActive &&
-                  "underline decoration-2 underline-offset-4 text-foreground",
-              )}
-              asChild
+              className={cn("text-foreground rounded-full")}
+              onClick={() => sectionButonClicked(sectionId)}
             >
-              <Link href={href}>{label}</Link>
+              {label}
             </Button>
           </li>
         );
