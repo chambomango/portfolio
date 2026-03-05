@@ -24,7 +24,7 @@ function getStarCountForArea(area: number) {
 
 function createStar(width: number, height: number): Star {
   const isBright = Math.random() < 0.08;
-  const twinkles = Math.random() < 0.4;
+  const twinkles = Math.random() < (isBright ? 0.85 : 0.3);
   return {
     x: Math.random() * width,
     y: Math.random() * height,
@@ -145,12 +145,19 @@ export default function StarryNight() {
     });
     //#endregion
 
+    //#region Stars Toggle
+    let starsEnabled = true;
+    const onStarsToggle = (e: Event) => {
+      starsEnabled = (e as CustomEvent<boolean>).detail;
+    };
+    window.addEventListener("stars-visibility-changed", onStarsToggle);
+    //#endregion
+
     //#region Draw Stars on Canvas
     let reqAnimFrameId: number;
     const animate = (timeElapsed: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      console.log("animate called");
-      if (dark) {
+      if (dark && starsEnabled) {
         const secondsElapsed = timeElapsed / 1000;
         for (const s of stars) {
           const twinkle =
@@ -176,6 +183,7 @@ export default function StarryNight() {
     return () => {
       cancelAnimationFrame(reqAnimFrameId);
       window.removeEventListener("resize", onResizeCanvas);
+      window.removeEventListener("stars-visibility-changed", onStarsToggle);
       observer.disconnect();
     };
   }, []);

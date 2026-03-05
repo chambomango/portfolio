@@ -7,6 +7,8 @@ import { smoothScroll } from "@/lib/smoothScroll";
 import ThemeToggle from "./themeToggle";
 import NavLinks from "./navLinks";
 import { Button } from "@/components/ui/button";
+import { Toggle } from "@/components/ui/toggle";
+import { Sparkles } from "lucide-react";
 import GitHubIcon from "./icons/GitHubIcon";
 import LinkedInIcon from "./icons/LinkedInIcon";
 import EmailIcon from "./icons/EmailIcon";
@@ -16,6 +18,14 @@ const SCROLL_THRESHOLD = 50;
 
 export default function NavBar() {
   const [visible, setVisible] = useState(true);
+  const [starsVisible, setStarsVisible] = useState(true);
+
+  const toggleStars = React.useCallback((next: boolean) => {
+    setStarsVisible(next);
+    window.dispatchEvent(
+      new CustomEvent("stars-visibility-changed", { detail: next }),
+    );
+  }, []);
   const lastScrollY = useRef(0);
   const suppressHide = useRef(false);
   const suppressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -126,9 +136,21 @@ export default function NavBar() {
           </li>
         </ul>
         <span className="text-muted-foreground px-1">|</span>
-        <ul>
+        <ul className="flex flex-row items-center gap-0.5">
           <li>
             <ThemeToggle />
+          </li>
+          <li className="hidden dark:flex">
+            <Toggle
+              pressed={starsVisible}
+              onPressedChange={toggleStars}
+              size="sm"
+              className="rounded-full gap-1.5 px-2.5 text-xs cursor-pointer"
+              aria-label="Toggle stars"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              Stars
+            </Toggle>
           </li>
         </ul>
       </nav>
