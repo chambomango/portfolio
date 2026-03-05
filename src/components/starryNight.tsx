@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-const PIXELS_PER_STAR = 6000;
+const PIXELS_PER_STAR = 2000;
 const STAR_CREATION_BUFFER = 200;
 
 interface Star {
@@ -12,6 +12,7 @@ interface Star {
   twinkleSpeed: number;
   twinklePhase: number;
   twinkleAmplitude: number;
+  color: string;
 }
 
 interface ShootingStar {
@@ -34,18 +35,43 @@ function getStarCountForArea(area: number) {
 }
 
 function createStar(width: number, height: number): Star {
-  const isBright = Math.random() < 0.08;
-  const twinkles = Math.random() < (isBright ? 0.85 : 0.3);
+  const roll = Math.random();
+  const isLarge = roll < 0.0267;
+  const isMidSized = roll < 0.333;
+  const twinkles = Math.random() < (isLarge ? 0.85 : isMidSized ? 0.3 : 0.05);
+
+  let size: number;
+  let baseOpacity: number;
+  let color: string;
+
+  // warm-to-white bright stars
+  if (isLarge) {
+    size = 1.2 + Math.random() * 0.8;
+    baseOpacity = 0.7 + Math.random() * 0.3;
+    const warm = Math.random() < 0.7;
+    color = warm ? `255, 240, 210` : `255, 255, 255`;
+  }
+  // blue-to-white smaller stars
+  else if (isMidSized) {
+    size = 0.5 + Math.random() * 0.6;
+    baseOpacity = 0.2 + Math.random() * 0.35;
+    const bluish = Math.random() < 0.3;
+    color = bluish ? `220, 230, 255` : `255, 255, 255`;
+  }
+  // micro stars — roughly 75% of them
+  else {
+    size = 0.2 + Math.random() * 0.3;
+    baseOpacity = 0.04 + Math.random() * 0.12;
+    color = `200, 215, 255`; // faint blue-white haze
+  }
+
   return {
     x: Math.random() * width,
     y: Math.random() * height,
-    size: isBright ? 1.2 + Math.random() * 0.8 : 0.5 + Math.random() * 0.6,
-    baseOpacity: isBright
-      ? 0.7 + Math.random() * 0.3
-      : 0.2 + Math.random() * 0.35,
+    size,
+    baseOpacity,
+    color,
     twinklePhase: Math.random() * Math.PI * 2,
-    // twinkleSpeed: twinkles ? 0.3 + Math.random() * 1.2 : 0,
-    // twinkleAmplitude: twinkles ? 0.1 + Math.random() * 0.25 : 0,
     twinkleSpeed: twinkles ? 1.0 + Math.random() * 2.0 : 0,
     twinkleAmplitude: twinkles ? 0.18 + Math.random() * 0.28 : 0,
   };
@@ -199,7 +225,7 @@ export default function StarryNight() {
           ctx.beginPath();
           //stars represented by circles
           ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+          ctx.fillStyle = `rgba(${s.color}, ${opacity})`;
           ctx.fill();
         }
 
