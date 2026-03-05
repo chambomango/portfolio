@@ -67,7 +67,7 @@ export default function Home() {
   }, [displayText, headlineIndex, isBackspacing]);
 
   return (
-    <div className="flex flex-col items-center justify-center mx-auto mb-30">
+    <div className="relative z-10 flex flex-col items-center justify-center mx-auto mb-30">
       <section className="animate-show max-w-207 h-[100vh]">
         <div className="mt-30 flex flex-col">
           <span className="font-mono text-lg text-muted-foreground mb-6 inline-flex items-baseline leading-none">
@@ -97,19 +97,29 @@ export default function Home() {
         <span className="font-mono text-2xl text-foreground">About Me</span>
         <hr className="mt-2 mb-6" />
         <p className="text-justify mb-8 text-muted-foreground">
-          I build modern user interfaces with React and TypeScript, using
-          Tailwind CSS, Redux, custom hooks, and Jest to ship reliable features.
-          I also design and implement APIs, business logic, and data access
-          layers in C#, ASP.NET, Python, and Entity Framework backed by SQL
-          Server. I have worked at two B2B software companies serving clients
-          ranging from Fortune 500 organizations to small local businesses.
+          I build modern user interfaces with React, TypeScript, Next.js, Redux,
+          and Tailwind CSS to ship reliable features. I design and implement
+          RESTful APIs and backend services in C# and Python. Using SQL, I
+          extract, transform, and analyze data to uncover trends and key
+          metrics. My work has contributed to applications and and tools used by
+          organizations ranging from Fortune 500 companies to local businesses.
         </p>
         <p className="text-justify mb-8 text-muted-foreground">
-          I care a lot about staying current with the rapid changes in our
-          field, working with AI coding companions, refining my workflow, and
-          keeping up with new tools and evolving languages and frameworks while
-          collaborating closely with teammates to learn, teach, and ship
-          products that deliver real value.
+          I take continuous improvement seriously. This field evolves rapidly
+          and studying new tools, evolving frameworks, and imrovements to the
+          development process keeps me sharp and ready. Recently, I’ve been
+          refining my workflow and exploring AI-assisted development tools like
+          GitHub Copilot and Claude where they add value. I see these tools as
+          useful complements to strong fundamentals, and I place a high bar on
+          understanding the underlying technologies myself and maintaining code
+          quality through thoughtful review.
+        </p>
+
+        <p className="text-justify mb-8 text-muted-foreground">
+          I enjoy collaborating closely with teammates to learn from each other,
+          share ideas, and ship products that make a meaningful impact. If you
+          would like to collaborate, you can reach me by LinkedIn or email -
+          both linked in the navigation bar.
         </p>
         <div className="mt-4 flex gap-4 justify-between">
           <div className="rounded-sm p-4 flex flex-col items-center flex-1">
@@ -174,11 +184,11 @@ export default function Home() {
           />
           <TechStackSection
             title="Front-End"
-            items={["React", "Redux", "Next.js", "Blazor"]}
+            items={["React", "Redux", "Next.js", "Blazor", "Jest"]}
           />
           <TechStackSection
             title="Back-End"
-            items={["ASP.NET", "Node.js", "FastAPI"]}
+            items={["ASP.NET Core", "Node.js", "FastAPI"]}
           />
           <TechStackSection
             title="DevOps & Cloud"
