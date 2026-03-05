@@ -84,7 +84,11 @@ export default function NavBar() {
               className="rounded-full"
               asChild
             >
-              <a href="https://www.linkedin.com/in/ben-chamberlain/">
+              <a
+                href="https://www.linkedin.com/in/ben-chamberlain/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 <LinkedInIcon className="h-4 w-4 text-foreground" />
                 <span className="sr-only">LinkedIn</span>
               </a>
@@ -97,7 +101,11 @@ export default function NavBar() {
               className="rounded-full"
               asChild
             >
-              <a href="https://github.com/chambomango/">
+              <a
+                href="https://github.com/chambomango/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 <GitHubIcon className="h-4 w-4 text-foreground" />
                 <span className="sr-only">GitHub</span>
               </a>

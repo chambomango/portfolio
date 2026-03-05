@@ -3,6 +3,7 @@ import "./globals.css";
 import NavBar from "../components/navBar";
 import { ThemeProvider } from "../components/themeProvider";
 import { Space_Grotesk } from "next/font/google";
+import StarryNight from "@/components/starryNight";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <StarryNight />
           <NavBar />
           {children}
         </ThemeProvider>

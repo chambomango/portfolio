@@ -106,13 +106,13 @@ export default function Home() {
         </p>
         <p className="text-justify mb-8 text-muted-foreground">
           I take continuous improvement seriously. This field evolves rapidly
-          and studying new tools, evolving frameworks, and imrovements to the
+          and studying new tools, evolving frameworks, and changes to the
           development process keeps me sharp and ready. Recently, I’ve been
-          refining my workflow and exploring AI-assisted development tools like
-          GitHub Copilot and Claude where they add value. I see these tools as
-          useful complements to strong fundamentals, and I place a high bar on
-          understanding the underlying technologies myself and maintaining code
-          quality through thoughtful review.
+          refining my workflow and exploring AI tools such as Claude and Github
+          Copilot where they add value. I see these tools as useful complements
+          to strong fundamentals, and I place a high bar on understanding the
+          underlying technologies myself and maintaining code quality through
+          thoughtful review.
         </p>
 
         <p className="text-justify mb-8 text-muted-foreground">
@@ -216,7 +216,7 @@ export default function Home() {
           Project Showcase
         </span>
         <hr className="mt-2 mb-6" />
-        <div className="bg-muted p-8 rounded-xl">
+        <div className="bg-muted dark:bg-emphasized-card p-8 rounded-xl">
           <div className="flex gap-22 items-center justify-center">
             <div>
               <a
