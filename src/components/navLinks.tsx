@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Route } from "next";
+import { smoothScrollToElement } from "@/lib/smoothScroll";
 import React from "react";
 
 const links: { id: string; label: string }[] = [
@@ -15,8 +13,10 @@ const links: { id: string; label: string }[] = [
 
 export default function NavLinks() {
   const sectionButonClicked = React.useCallback((sectionId: string) => {
+    const el = document.getElementById(sectionId);
+    if (!el) return;
     window.dispatchEvent(new CustomEvent("nav-link-scroll"));
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+    smoothScrollToElement(el);
   }, []);
 
   return (
@@ -26,7 +26,7 @@ export default function NavLinks() {
           <li key={`nav-btn-${sectionId}`}>
             <Button
               variant="ghost"
-              className={cn("text-foreground rounded-full")}
+              className={cn("text-foreground rounded-full cursor-pointer")}
               onClick={() => sectionButonClicked(sectionId)}
             >
               {label}

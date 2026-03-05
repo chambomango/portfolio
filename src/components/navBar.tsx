@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { smoothScroll } from "@/lib/smoothScroll";
 
 import ThemeToggle from "./themeToggle";
 import NavLinks from "./navLinks";
@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import GitHubIcon from "./icons/GitHubIcon";
 import LinkedInIcon from "./icons/LinkedInIcon";
 import EmailIcon from "./icons/EmailIcon";
+import React from "react";
 
 const SCROLL_THRESHOLD = 50;
 
@@ -41,7 +42,7 @@ export default function NavBar() {
       if (suppressTimer.current) clearTimeout(suppressTimer.current);
       suppressTimer.current = setTimeout(() => {
         suppressHide.current = false;
-      }, 1200);
+      }, 1500);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -50,6 +51,11 @@ export default function NavBar() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("nav-link-scroll", handleNavLinkScroll);
     };
+  }, []);
+
+  const homeLinkClicked = React.useCallback(() => {
+    window.dispatchEvent(new CustomEvent("nav-link-scroll"));
+    smoothScroll(0);
   }, []);
 
   return (
@@ -62,9 +68,9 @@ export default function NavBar() {
             : "opacity-0 -translate-y-full pointer-events-none",
         )}
       >
-        <Link href="/">
-          <span className="px-2">Ben Chamberlain</span>
-        </Link>
+        <button className="px-2 cursor-pointer" onClick={homeLinkClicked}>
+          Ben Chamberlain
+        </button>
         <span className="text-muted-foreground px-1">|</span>
         <ul className="flex flex-row items-center">
           <NavLinks />

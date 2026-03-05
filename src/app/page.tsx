@@ -167,16 +167,19 @@ export default function Home() {
               "Python",
               "Java",
               "Scala",
-              "C++",
               "PowerShell",
-              "SQL",
+              "PostgreSQL",
+              "SQL Server",
             ]}
           />
           <TechStackSection
             title="Front-End"
             items={["React", "Redux", "Next.js", "Blazor"]}
           />
-          <TechStackSection title="Back-End" items={["ASP.NET", "Node.js"]} />
+          <TechStackSection
+            title="Back-End"
+            items={["ASP.NET", "Node.js", "FastAPI"]}
+          />
           <TechStackSection
             title="DevOps & Cloud"
             items={[
@@ -188,7 +191,7 @@ export default function Home() {
           />
           <TechStackSection
             title="Tools"
-            items={["Docker", "Postman", "Git", "GitHub"]}
+            items={["Docker", "Postman", "Git", "GitHub Copilot"]}
           />
         </div>
       </section>
