@@ -1,19 +1,9 @@
 "use client";
-import TechStackSection from "@/components/techStackSection";
-import GraduationCapIcon from "@/components/icons/GraduationCapIcon";
-import MapPinIcon from "@/components/icons/MapPinIcon";
-import Link from "next/link";
 import React from "react";
-import { CodeXml } from "lucide-react";
-
-const HEADLINES = [
-  "full-stack software engineer",
-  "building with typescript & react",
-  "turning data into insight",
-  "api & database architect",
-  "cloud & ci/cd minded",
-  "ui/ux focused",
-];
+import AboutMe from "@/components/aboutMe";
+import TechStack from "@/components/techStack";
+import Projects from "@/components/projects";
+import HomepageIntro from "@/components/homepageIntro";
 
 export default function Home() {
   const sectionAnimations = React.useCallback((node: HTMLDivElement | null) => {
@@ -27,263 +17,34 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  const stopPropagation = React.useCallback(
-    (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-      event.stopPropagation(),
-    [],
-  );
-
-  const [displayText, setDisplayText] = React.useState("");
-  const [headlineIndex, setHeadlineIndex] = React.useState(0);
-  const [isBackspacing, setisBackspacing] = React.useState(false);
-
-  React.useEffect(() => {
-    const currentHeadline = HEADLINES[headlineIndex];
-
-    //Pause before next backspace animation
-    if (!isBackspacing && displayText === currentHeadline) {
-      const id = setTimeout(() => setisBackspacing(true), 2000);
-      return () => clearTimeout(id);
-    }
-
-    //Finished backspacing - prepping to start typing
-    if (isBackspacing && displayText === "") {
-      setisBackspacing(false);
-      setHeadlineIndex((index) => (index + 1) % HEADLINES.length);
-      return;
-    }
-
-    //Animation effect for typing/backspacing
-    const id = setTimeout(
-      () =>
-        setDisplayText(
-          isBackspacing
-            ? currentHeadline.slice(0, displayText.length - 1)
-            : currentHeadline.slice(0, displayText.length + 1),
-        ),
-      isBackspacing ? 30 : 80,
-    );
-    return () => clearTimeout(id);
-  }, [displayText, headlineIndex, isBackspacing]);
-
   return (
     <div className="relative z-10 flex flex-col items-center justify-center mx-auto mb-30">
       <section className="animate-show max-w-207 h-[100vh]">
-        <div className="mt-30 flex flex-col">
-          <span className="font-mono text-lg text-muted-foreground mb-6 inline-flex items-baseline leading-none">
-            <span>// {displayText}</span>
-            <span aria-hidden="true" className="caret-blink" />
-          </span>
-          <div className="text-foreground font-bold text-7xl mb-2">
-            benjamin
-          </div>
-          <div className="text-muted-foreground dark:text-foreground font-bold text-7xl mb-8">
-            chamberlain
-          </div>
-        </div>
-        <p className="font-mono text-mdleading-relaxed text-muted-foreground max-w-102 dark:bg-background dark:rounded-xl">
-          Hi, I’m Ben — welcome to my site. I use this space to experiment,
-          build, and share projects I’m working on. The full source code for
-          everything here is available on my GitHub.
-        </p>
+        <HomepageIntro />
       </section>
 
-      {/* About Me */}
       <section
-        ref={sectionAnimations}
         id="about-me"
+        ref={sectionAnimations}
         className="scroll-mt-20 pt-10 mb-50 animate-hidden max-w-207 w-full"
       >
-        <span className="font-mono text-2xl text-foreground">About Me</span>
-        <hr className="mt-2 mb-6" />
-        <div className=" dark:bg-background dark:rounded-xl">
-          <p className="text-justify mb-8 text-muted-foreground">
-            I build modern user interfaces with React, TypeScript, Next.js,
-            Redux, and Tailwind CSS to ship reliable features. I design and
-            implement RESTful APIs and backend services in C# and Python. Using
-            SQL, I extract, transform, and analyze data to uncover trends and
-            key metrics. My work has contributed to applications and and tools
-            used by organizations ranging from Fortune 500 companies to local
-            businesses.
-          </p>
-          <p className="text-justify mb-8 text-muted-foreground">
-            I take continuous improvement seriously. This field evolves rapidly
-            and studying new tools, evolving frameworks, and changes to the
-            development process keeps me sharp and ready. Recently, I’ve been
-            refining my workflow and exploring AI tools such as Claude and
-            Github Copilot where they add value. I see these tools as useful
-            complements to strong fundamentals, and I place a high bar on
-            understanding the underlying technologies myself and maintaining
-            code quality through thoughtful review.
-          </p>
-          <p className="text-justify mb-8 text-muted-foreground">
-            I enjoy collaborating closely with teammates to learn from each
-            other, share ideas, and ship products that make a meaningful impact.
-            If you would like to collaborate, you can reach me by LinkedIn or
-            email - both linked in the navigation bar.
-          </p>
-        </div>
-
-        <div className="mt-4 mx-4 flex gap-18 justify-between">
-          <div className="bg-card rounded-xl py-4 flex flex-col items-center flex-1">
-            <h1 className="h-22 content-center text-muted-foreground dark:text-foreground">
-              5+
-            </h1>
-            <p className="text-center text-sm text-muted-foreground">
-              Years of Professional
-            </p>
-            <p className="text-center text-sm text-muted-foreground">
-              Experience
-            </p>
-          </div>
-          <div className="bg-card rounded-xl py-4 flex flex-col items-center flex-1">
-            <div className="h-22 content-center">
-              <GraduationCapIcon className="w-16 h-16 text-muted-foreground dark:text-foreground" />
-            </div>
-            <p className="text-center text-sm text-muted-foreground mt-2">
-              B.S. Computer Science
-              <br />
-              University of New Hampshire
-            </p>
-          </div>
-          <div className="bg-card rounded-xl py-4 flex flex-col items-center flex-1">
-            <div className="h-22 content-center">
-              <MapPinIcon className="w-15 h-15 text-muted-foreground dark:text-foreground" />
-            </div>
-            <p className="text-center text-sm text-muted-foreground mt-2">
-              Barrington,
-              <br />
-              New Hampshire
-            </p>
-          </div>
-        </div>
+        <AboutMe />
       </section>
 
-      {/* Tech Stack */}
       <section
         id="tech-stack"
         ref={sectionAnimations}
         className="scroll-mt-20 pt-10 mb-50 animate-hidden max-w-207 w-full"
       >
-        <span className="font-mono text-2xl text-foreground">
-          Technology Stack
-        </span>
-        <hr className="mt-2 mb-6" />
-        <div className="flex flex-col gap-12">
-          <TechStackSection
-            title="Front-End"
-            items={[
-              "React",
-              "TypeScript",
-              "Redux",
-              "Next.js",
-              "HTML",
-              "CSS",
-              "Tailwind CSS",
-              "Blazor",
-              "Jest",
-            ]}
-          />
-          <TechStackSection
-            title="Back-End"
-            items={[
-              "C#",
-              "Python",
-              "Java",
-              "Scala",
-              "PostgreSQL",
-              "SQL Server",
-              "ASP.NET Core",
-              "Node.js",
-              "FastAPI",
-              "PowerShell",
-            ]}
-          />
-          <TechStackSection
-            title="DevOps & Cloud"
-            items={[
-              "Amazon Web Services",
-              "Azure DevOps",
-              "GitHub Actions",
-              "Vercel",
-            ]}
-          />
-          <TechStackSection
-            title="Tools"
-            items={[
-              "VS Code",
-              "Docker",
-              "Git",
-              "GitHub",
-              "GitHub Copilot",
-              "Postman",
-            ]}
-          />
-        </div>
+        <TechStack />
       </section>
 
-      {/* Projects */}
       <section
         id="projects"
         ref={sectionAnimations}
         className="scroll-mt-20 pt-10 mb-100 animate-hidden max-w-207 w-full"
       >
-        <span className="font-mono text-2xl text-foreground">
-          Project Showcase
-        </span>
-        <hr className="mt-2 mb-6" />
-        <div className="bg-muted dark:bg-card p-8 rounded-xl">
-          <div className="flex gap-22 items-center justify-center">
-            <div>
-              <a
-                className="hover:underline hover:decoration-foreground"
-                href="https://bc-pokedex.vercel.app/"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <div className="flex gap-2">
-                  <h3 className="font-semibold text-foreground mb-3">
-                    Pokédex App
-                  </h3>
-                </div>
-              </a>
-              <p className="text-muted-foreground">
-                View Pokémon across all nine generations. Search for your
-                favorite and filter by type/generation. Click on a Pokémon to
-                learn more about it.
-              </p>
-              <br />
-              <p className="text-muted-foreground mb-5">
-                The technical patterns used in this project are described in
-                more detail within the README.md of the source code linked
-                below.
-              </p>
-              <div className="source-code">
-                <a
-                  className="flex w-fit gap-2 text-foreground font-semibold border px-3 py-1 rounded-md"
-                  href="https://github.com/chambomango/pokedex"
-                  onClick={stopPropagation}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <CodeXml />
-                  <span>Source Code</span>
-                </a>
-              </div>
-            </div>
-            <div className="flex min-h-48 min-w-48 items-center justify-center">
-              <img
-                className="h-48 w-48 [image-rendering:pixelated]"
-                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/2.gif"
-                alt="pokedex-img"
-                loading="lazy"
-                decoding="async"
-                width={192}
-                height={192}
-              />
-            </div>
-          </div>
-        </div>
+        <Projects />
       </section>
     </div>
   );
