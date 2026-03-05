@@ -10,7 +10,7 @@ export default function HomepageIntro() {
           chamberlain
         </div>
       </div>
-      <p className="font-mono text-mdleading-relaxed text-muted-foreground max-w-102 dark:bg-background dark:rounded-xl">
+      <p className="font-mono text-md leading-relaxed text-muted-foreground dark:text-zinc-300 max-w-102 dark:bg-background dark:rounded-xl">
         Hi, I’m Ben — welcome to my site. I use this space to experiment, build,
         and share projects I’m working on. The full source code for everything
         here is available on my GitHub.

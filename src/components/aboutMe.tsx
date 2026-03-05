@@ -34,7 +34,7 @@ export default function AboutMe() {
 
       <div className="mt-4 mx-4 flex gap-18 justify-between">
         <div className="bg-card rounded-xl py-4 flex flex-col items-center flex-1">
-          <h1 className="h-22 content-center text-muted-foreground dark:text-zinc-300">
+          <h1 className="h-22 content-center text-5xl font-bold text-muted-foreground dark:text-zinc-300">
             5+
           </h1>
           <p className="text-center text-sm text-muted-foreground">
