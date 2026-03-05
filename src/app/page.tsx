@@ -81,7 +81,7 @@ export default function Home() {
             chamberlain
           </div>
         </div>
-        <p className="font-mono text-md m leading-relaxed text-muted-foreground max-w-102">
+        <p className="font-mono text-mdleading-relaxed text-muted-foreground max-w-102 dark:bg-background dark:rounded-xl">
           Hi, I’m Ben — welcome to my site. I use this space to experiment,
           build, and share projects I’m working on. The full source code for
           everything here is available on my GitHub.
@@ -96,33 +96,36 @@ export default function Home() {
       >
         <span className="font-mono text-2xl text-foreground">About Me</span>
         <hr className="mt-2 mb-6" />
-        <p className="text-justify mb-8 text-muted-foreground">
-          I build modern user interfaces with React, TypeScript, Next.js, Redux,
-          and Tailwind CSS to ship reliable features. I design and implement
-          RESTful APIs and backend services in C# and Python. Using SQL, I
-          extract, transform, and analyze data to uncover trends and key
-          metrics. My work has contributed to applications and and tools used by
-          organizations ranging from Fortune 500 companies to local businesses.
-        </p>
-        <p className="text-justify mb-8 text-muted-foreground">
-          I take continuous improvement seriously. This field evolves rapidly
-          and studying new tools, evolving frameworks, and changes to the
-          development process keeps me sharp and ready. Recently, I’ve been
-          refining my workflow and exploring AI tools such as Claude and Github
-          Copilot where they add value. I see these tools as useful complements
-          to strong fundamentals, and I place a high bar on understanding the
-          underlying technologies myself and maintaining code quality through
-          thoughtful review.
-        </p>
+        <div className=" dark:bg-background dark:rounded-xl">
+          <p className="text-justify mb-8 text-muted-foreground">
+            I build modern user interfaces with React, TypeScript, Next.js,
+            Redux, and Tailwind CSS to ship reliable features. I design and
+            implement RESTful APIs and backend services in C# and Python. Using
+            SQL, I extract, transform, and analyze data to uncover trends and
+            key metrics. My work has contributed to applications and and tools
+            used by organizations ranging from Fortune 500 companies to local
+            businesses.
+          </p>
+          <p className="text-justify mb-8 text-muted-foreground">
+            I take continuous improvement seriously. This field evolves rapidly
+            and studying new tools, evolving frameworks, and changes to the
+            development process keeps me sharp and ready. Recently, I’ve been
+            refining my workflow and exploring AI tools such as Claude and
+            Github Copilot where they add value. I see these tools as useful
+            complements to strong fundamentals, and I place a high bar on
+            understanding the underlying technologies myself and maintaining
+            code quality through thoughtful review.
+          </p>
+          <p className="text-justify mb-8 text-muted-foreground">
+            I enjoy collaborating closely with teammates to learn from each
+            other, share ideas, and ship products that make a meaningful impact.
+            If you would like to collaborate, you can reach me by LinkedIn or
+            email - both linked in the navigation bar.
+          </p>
+        </div>
 
-        <p className="text-justify mb-8 text-muted-foreground">
-          I enjoy collaborating closely with teammates to learn from each other,
-          share ideas, and ship products that make a meaningful impact. If you
-          would like to collaborate, you can reach me by LinkedIn or email -
-          both linked in the navigation bar.
-        </p>
-        <div className="mt-4 flex gap-4 justify-between">
-          <div className="rounded-sm p-4 flex flex-col items-center flex-1">
+        <div className="mt-4 mx-4 flex gap-18 justify-between">
+          <div className="bg-card rounded-xl py-4 flex flex-col items-center flex-1">
             <h1 className="h-22 content-center text-muted-foreground dark:text-foreground">
               5+
             </h1>
@@ -133,7 +136,7 @@ export default function Home() {
               Experience
             </p>
           </div>
-          <div className="rounded-sm p-4 flex flex-col items-center flex-1">
+          <div className="bg-card rounded-xl py-4 flex flex-col items-center flex-1">
             <div className="h-22 content-center">
               <GraduationCapIcon className="w-16 h-16 text-muted-foreground dark:text-foreground" />
             </div>
@@ -143,7 +146,7 @@ export default function Home() {
               University of New Hampshire
             </p>
           </div>
-          <div className="rounded-sm p-4 flex flex-col items-center flex-1">
+          <div className="bg-card rounded-xl py-4 flex flex-col items-center flex-1">
             <div className="h-22 content-center">
               <MapPinIcon className="w-15 h-15 text-muted-foreground dark:text-foreground" />
             </div>
@@ -166,42 +169,55 @@ export default function Home() {
           Technology Stack
         </span>
         <hr className="mt-2 mb-6" />
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-12">
           <TechStackSection
-            title="Languages"
+            title="Front-End"
             items={[
+              "React",
               "TypeScript",
+              "Redux",
+              "Next.js",
               "HTML",
               "CSS",
+              "Tailwind CSS",
+              "Blazor",
+              "Jest",
+            ]}
+          />
+          <TechStackSection
+            title="Back-End"
+            items={[
               "C#",
               "Python",
               "Java",
               "Scala",
-              "PowerShell",
               "PostgreSQL",
               "SQL Server",
+              "ASP.NET Core",
+              "Node.js",
+              "FastAPI",
+              "PowerShell",
             ]}
-          />
-          <TechStackSection
-            title="Front-End"
-            items={["React", "Redux", "Next.js", "Blazor", "Jest"]}
-          />
-          <TechStackSection
-            title="Back-End"
-            items={["ASP.NET Core", "Node.js", "FastAPI"]}
           />
           <TechStackSection
             title="DevOps & Cloud"
             items={[
-              "Azure DevOps",
               "Amazon Web Services",
-              "Vercel",
+              "Azure DevOps",
               "GitHub Actions",
+              "Vercel",
             ]}
           />
           <TechStackSection
             title="Tools"
-            items={["Docker", "Postman", "Git", "GitHub Copilot"]}
+            items={[
+              "VS Code",
+              "Docker",
+              "Git",
+              "GitHub",
+              "GitHub Copilot",
+              "Postman",
+            ]}
           />
         </div>
       </section>
@@ -216,7 +232,7 @@ export default function Home() {
           Project Showcase
         </span>
         <hr className="mt-2 mb-6" />
-        <div className="bg-muted dark:bg-emphasized-card p-8 rounded-xl">
+        <div className="bg-muted dark:bg-card p-8 rounded-xl">
           <div className="flex gap-22 items-center justify-center">
             <div>
               <a
@@ -226,7 +242,9 @@ export default function Home() {
                 target="_blank"
               >
                 <div className="flex gap-2">
-                  <h3 className="font-semibold mb-3">Pokédex App</h3>
+                  <h3 className="font-semibold text-foreground mb-3">
+                    Pokédex App
+                  </h3>
                 </div>
               </a>
               <p className="text-muted-foreground">
