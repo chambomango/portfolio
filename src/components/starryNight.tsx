@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-const PIXELS_PER_STAR = 8000;
+const PIXELS_PER_STAR = 6000;
 const STAR_CREATION_BUFFER = 200;
 
 interface Star {
@@ -12,6 +12,17 @@ interface Star {
   twinkleSpeed: number;
   twinklePhase: number;
   twinkleAmplitude: number;
+}
+
+interface ShootingStar {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  length: number;
+  opacity: number;
+  life: number; // 0–1, current progress
+  decay: number; // how fast it fades
 }
 
 function isDarkMode() {
@@ -63,6 +74,22 @@ function createStarInRect(
     ...s,
     x: x0 + Math.random() * width,
     y: y0 + Math.random() * height,
+  };
+}
+
+function createShootingStar(width: number, height: number): ShootingStar {
+  // Start from top half of screen, travel down-right at a shallow angle
+  const angle = (15 + Math.random() * 25) * (Math.PI / 180);
+  const speed = 10 + Math.random() * 12;
+  return {
+    x: Math.random() * width,
+    y: Math.random() * height * 0.5,
+    vx: Math.cos(angle) * speed,
+    vy: Math.sin(angle) * speed,
+    length: 50 + Math.random() * 120,
+    opacity: 0.6 + Math.random() * 0.4,
+    life: 0,
+    decay: 0.012 + Math.random() * 0.01,
   };
 }
 
@@ -154,8 +181,11 @@ export default function StarryNight() {
     //#endregion
 
     //#region Draw Stars on Canvas
-    let reqAnimFrameId: number;
-    const animate = (timeElapsed: number) => {
+    const activeShootStars: ShootingStar[] = [];
+    let nextShootStarSpawn = 0;
+    let starAnimateId: number;
+
+    const animateStars = (timeElapsed: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       if (dark && starsEnabled) {
         const secondsElapsed = timeElapsed / 1000;
@@ -172,16 +202,54 @@ export default function StarryNight() {
           ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
           ctx.fill();
         }
+
+        // Spawn a new shooting star every 3–7 seconds
+        if (timeElapsed >= nextShootStarSpawn) {
+          activeShootStars.push(
+            createShootingStar(canvas.width, canvas.height),
+          );
+          nextShootStarSpawn = timeElapsed + 6000 + Math.random() * 4000;
+        }
+
+        for (let i = activeShootStars.length - 1; i >= 0; i--) {
+          const s = activeShootStars[i];
+          s.life += s.decay;
+
+          if (s.life >= 1) {
+            activeShootStars.splice(i, 1);
+            continue;
+          }
+
+          // Fade in quickly, linger, then fade out
+          const alpha = s.opacity * Math.sin(s.life * Math.PI);
+
+          const tailX = s.x - s.vx * (s.length / 10);
+          const tailY = s.y - s.vy * (s.length / 10);
+
+          const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
+          grad.addColorStop(0, `rgba(255, 255, 255, 0)`);
+          grad.addColorStop(1, `rgba(255, 255, 255, ${alpha})`);
+
+          ctx.beginPath();
+          ctx.moveTo(tailX, tailY);
+          ctx.lineTo(s.x, s.y);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          s.x += s.vx;
+          s.y += s.vy;
+        }
       }
 
-      reqAnimFrameId = requestAnimationFrame(animate);
+      starAnimateId = requestAnimationFrame(animateStars);
     };
 
-    reqAnimFrameId = requestAnimationFrame(animate);
+    starAnimateId = requestAnimationFrame(animateStars);
     //#endregion
 
     return () => {
-      cancelAnimationFrame(reqAnimFrameId);
+      cancelAnimationFrame(starAnimateId);
       window.removeEventListener("resize", onResizeCanvas);
       window.removeEventListener("stars-visibility-changed", onStarsToggle);
       observer.disconnect();
