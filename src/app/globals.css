@@ -197,10 +197,3 @@
   animation: blink 1s step-end infinite;
 }
 
-.source-code a:hover {
-  background-color: var(--accent);
-}
-
-.source-code a:active {
-  background-color: var(--secondary);
-}

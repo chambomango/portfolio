@@ -1,5 +1,5 @@
 "use client";
-import { CodeXml } from "lucide-react";
+import { CodeXml, ExternalLink } from "lucide-react";
 import React from "react";
 
 export default function Projects() {
@@ -41,15 +41,25 @@ export default function Projects() {
                 more detail within the README.md of the source code linked
                 below.
               </p>
-              <div className="source-code">
+              <div className="flex gap-3">
                 <a
-                  className="flex w-fit gap-2 text-foreground font-semibold border px-3 py-1 rounded-md"
+                  className="flex w-fit items-center gap-2 bg-foreground/4 text-foreground border px-3 py-1 rounded-md hover:bg-foreground/13"
+                  href="https://bc-pokedex.vercel.app/"
+                  onClick={stopPropagation}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <ExternalLink className="size-4.5" />
+                  <span>Live Site</span>
+                </a>
+                <a
+                  className="flex w-fit items-center gap-2 bg-foreground/4 text-foreground border px-3 py-1 rounded-md hover:bg-foreground/13"
                   href="https://github.com/chambomango/pokedex"
                   onClick={stopPropagation}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <CodeXml />
+                  <CodeXml className="size-5" />
                   <span>Source Code</span>
                 </a>
               </div>
@@ -90,20 +100,30 @@ export default function Projects() {
               </p>
               <br />
               <p className="text-muted-foreground mb-5">
-                The source code includes the database schema used to build the
+                The source code includes the database schema I used to build the
                 PostgreSQL database (hosted with Neon). I utilized data
                 warehouse modeling techniques such as dimensional and fact
                 tables, staging and mart views, and star-schema.
               </p>
-              <div className="source-code">
+              <div className="flex gap-3">
                 <a
-                  className="flex w-fit gap-2 text-foreground font-semibold border px-3 py-1 rounded-md"
+                  className="flex w-fit items-center gap-2 bg-foreground/4 text-foreground border px-3 py-1 rounded-md hover:bg-foreground/13"
+                  href="https://bc-dealerportal.vercel.app"
+                  onClick={stopPropagation}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <ExternalLink className="size-4.5" />
+                  <span>Live Site</span>
+                </a>
+                <a
+                  className="flex w-fit items-center gap-2 bg-foreground/4 text-foreground border px-3 py-1 rounded-md hover:bg-foreground/13"
                   href="https://github.com/chambomango/dealer-portal"
                   onClick={stopPropagation}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <CodeXml />
+                  <CodeXml className="size-5" />
                   <span>Source Code</span>
                 </a>
               </div>
