@@ -13,8 +13,8 @@ export default function TechStack() {
           items={[
             "React",
             "TypeScript",
-            "Redux",
             "Next.js",
+            "Redux Toolkit",
             "HTML",
             "CSS",
             "Tailwind CSS",
@@ -28,31 +28,32 @@ export default function TechStack() {
             "C#",
             "Python",
             "Java",
-            "Scala",
-            "PostgreSQL",
-            "SQL Server",
             "ASP.NET Core",
             "Node.js",
-            "FastAPI",
             "PowerShell",
           ]}
+        />
+        <TechStackSection
+          title="Databases"
+          items={["SQL Server", "PostgreSQL"]}
         />
         <TechStackSection
           title="DevOps & Cloud"
           items={[
             "Amazon Web Services",
             "Azure DevOps",
+            "Docker",
             "GitHub Actions",
-            "Vercel",
           ]}
         />
         <TechStackSection
           title="Tools"
           items={[
-            "VS Code",
-            "Docker",
             "Git",
             "GitHub",
+            "GitLab",
+            "VS Code",
+            "Cursor",
             "GitHub Copilot",
             "Postman",
           ]}
