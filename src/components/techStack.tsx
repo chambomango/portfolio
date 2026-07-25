@@ -44,6 +44,7 @@ export default function TechStack() {
             "Azure DevOps",
             "Docker",
             "GitHub Actions",
+            "Terraform",
           ]}
         />
         <TechStackSection
